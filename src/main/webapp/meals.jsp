@@ -14,10 +14,12 @@
     <thead>
     <tr>
         <th>№</th>
+        <th>ИД</th>
         <th>Дата</th>
         <th>Описание</th>
         <th>Калории</th>
         <th>Превышение</th>
+        <th>Операции</th>
     </tr>
     </thead>
     <tbody>
@@ -27,10 +29,12 @@
         <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealWithExceed"/>
         <tr style="color: ${meal.exceed ? 'red' : 'green'}" >
             <td><c:out value="${loop.index+1}"/></td>
+            <td><c:out value="${meal.id}"/></td>
             <td><%= TimeUtil.dateToString(meal.getDateTime()) %></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
+            <td><a href="addmeal">Добавить</a> <a href="editmeal">Редактировать</a> <a href="deletemeal">Удалить</a> </td>
         </tr>
     </c:forEach>
     </tbody>
