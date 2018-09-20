@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 
+@Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
     private Map<Integer, Meal> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
@@ -35,7 +37,7 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     @Override
     public void delete(int id, int userId) {
         Meal meal = repository.get(id);
-        checkNotFound(meal, "Meal not found");
+        checkNotFound(meal, String.format("id=%d, userId=%d", id, userId));
         if (meal != null && meal.getUserId() == userId) {
             repository.remove(id);
         }
